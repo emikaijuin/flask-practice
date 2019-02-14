@@ -23,8 +23,15 @@ def index():
 @app.route("/stores", methods=["GET","POST"])
 def stores():
   if request.method == "POST":
-    store = Store.create(name=request.form['name'])
-    return redirect(url_for('store', id=store.id))
+    store = Store(name=request.form['name'])
+    if store.save():
+      return redirect(url_for('store', id=store.id))
+    else:
+      return render_template(
+        "store/new.html", 
+        name=request.form['name'],
+        errors=store.errors
+      )
   else:
     return render_template("store/index.html", stores=Store.select())
 
