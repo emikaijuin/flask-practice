@@ -1,0 +1,11 @@
+<form action="/warehouses" method="POST">
+  <label for="location">City</label>
+  <input type="text" name="location" />
+  <label for="Store"></label>
+  <select name="store">
+    {% for store in stores %}
+    <option value={{store.id}}>{{store.name}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit">
+</form>

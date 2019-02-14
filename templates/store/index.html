@@ -1,0 +1,22 @@
+{% extends "_layout.html" %}
+{% block content %}
+  <table>
+    <tr>
+      <td>Store Name</td>
+      <td>Number of Warehouses</td>
+      <td></td>
+    </tr>
+    {% for store in stores %}
+      <tr>
+        <td>
+          <a href={{url_for('store', id=store.id)}}>{{ store.name }}</a></td>
+        <td>{{ store.warehouses.count() }}</td>
+        <td>
+          <form action="/stores/{{store.id}}/delete" method="POST">
+            <input type="submit" class="btn btn-outline-danger" value="delete">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
